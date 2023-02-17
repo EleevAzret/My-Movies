@@ -19,6 +19,7 @@ const moviesStore = {
     movies: {},
   },
   getters: {
+    moviesList: ({ movies }) => movies,
     moviesPerPage: ({ moviesPerPage }) => moviesPerPage,
     currentPage: ({ currentPage }) => currentPage,
   },
