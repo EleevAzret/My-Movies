@@ -1,20 +1,22 @@
 <template>
   <div id="app">
-    <button @click="onClick" type="button" class="btn btn-success">Success</button>
+    <button @click="onClick" type="button" class="btn btn-success">
+      Success
+    </button>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 
 export default {
   name: "App",
   methods: {
-    ...mapActions('movies', ['fetchMovies']),
+    ...mapActions("movies", ["fetchMovies"]),
     onClick() {
       this.fetchMovies();
-    }
-  }
+    },
+  },
 };
 </script>
 
