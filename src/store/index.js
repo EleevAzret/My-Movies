@@ -1,7 +1,7 @@
 import { createStore } from "vuex";
 import movies from "./modules/movies.js";
 
-export default createStore({
+const store = createStore({
   state: {},
   getters: {},
   mutations: {},
@@ -10,3 +10,7 @@ export default createStore({
     movies,
   },
 });
+
+store.dispatch("initMovieStore");
+
+export default store;

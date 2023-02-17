@@ -28,6 +28,12 @@ const moviesStore = {
     },
   },
   actions: {
+    initMovieStore: {
+      handler({ dispatch }) {
+        dispatch("fetchMovies");
+      },
+      root: true,
+    },
     async fetchMovies({ getters, commit }) {
       try {
         const { moviesPerPage, currentPage } = getters;

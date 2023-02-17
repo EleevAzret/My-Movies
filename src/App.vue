@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <button @click="onClick" type="button" class="btn btn-success">
-      Success
-    </button>
   </div>
 </template>
 
@@ -13,9 +10,6 @@ export default {
   name: "App",
   methods: {
     ...mapActions("movies", ["fetchMovies"]),
-    onClick() {
-      this.fetchMovies();
-    },
   },
 };
 </script>
