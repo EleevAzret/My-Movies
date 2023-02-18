@@ -1,10 +1,11 @@
 <template>
   <div class="list">
     <div class="container">
-      <h2 class="list__title">{{ typeOfList }}</h2>
-      <div class="row row-cols-auto">
+      <h2 class="list__title mb-4">{{ typeOfList }}</h2>
+      <div class="row row-cols-auto justify-content-space-between gy-4">
         <template v-if="isExist">
-          <div class="col" v-for="(movie, key) in list" :key="key">
+          <div class="col-md" v-for="(movie, key) in list" :key="key">
+            <MovieItem :movie="movie" />
           </div>
         </template>
       </div>
@@ -13,8 +14,13 @@
 </template>
 
 <script>
+import MovieItem from "./MovieItem.vue";
+
 export default {
   name: "MoviesList",
+  components: {
+    MovieItem,
+  },
   props: {
     list: Object,
     default: () => ({}),
@@ -30,4 +36,4 @@ export default {
 };
 </script>
 
-<style lang="scss" src="../scss/list.scss" />
+<style lang="scss" src="../scss/list.scss" scoped />

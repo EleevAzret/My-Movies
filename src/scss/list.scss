@@ -1,6 +1,15 @@
 .list {
   &__title {
     color: var(--bs-dark);
-    margin-bottom: 3rem;
+
+    @media (max-width: 575.98px) {
+      padding-left: .7rem;
+    }
+  }
+
+  .row {
+    @media (max-width: 575.98px) {
+      justify-content: center;
+    }
   }
 }
