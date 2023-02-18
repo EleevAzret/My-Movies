@@ -2,6 +2,7 @@
   <div id="app">
     <PosterBg :url="url" />
     <MoviesList :list="moviesList" @changeBg="onChangePoster" />
+    <PaginationNav :pages="allPages" />
   </div>
 </template>
 
@@ -9,12 +10,14 @@
 import { mapActions, mapGetters } from "vuex";
 import MoviesList from "./components/MoviesList.vue";
 import PosterBg from "./components/PosterBg.vue";
+import PaginationNav from "./components/PaginationNav.vue";
 
 export default {
   name: "App",
   components: {
     MoviesList,
     PosterBg,
+    PaginationNav,
   },
   data: () => ({
     url: "",

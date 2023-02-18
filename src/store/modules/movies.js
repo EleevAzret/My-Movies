@@ -9,7 +9,7 @@ function serializeResponse(movies) {
   }, {});
 }
 
-const { MOVIES } = mutations;
+const { MOVIES, PAGES, CURRENT_PAGE } = mutations;
 
 const moviesStore = {
   namespaced: true,
@@ -17,15 +17,27 @@ const moviesStore = {
     moviesPerPage: 12,
     currentPage: 1,
     movies: {},
+    pages: 0,
   },
   getters: {
     moviesList: ({ movies }) => movies,
     moviesPerPage: ({ moviesPerPage }) => moviesPerPage,
     currentPage: ({ currentPage }) => currentPage,
+    allPages: ({ pages }) => pages,
   },
   mutations: {
     [MOVIES](state, value) {
       state.movies = value;
+    },
+    [PAGES](state, pages) {
+      if (pages > 20) {
+        state.pages = 20;
+      } else {
+        state.pages = pages;
+      }
+    },
+    [CURRENT_PAGE](state, page) {
+      state.currentPage = page;
     },
   },
   actions: {
@@ -43,9 +55,13 @@ const moviesStore = {
         );
         const movies = serializeResponse(response.docs);
         commit(MOVIES, movies);
+        commit(PAGES, response.pages);
       } catch (err) {
         console.log(err);
       }
+    },
+    changeCurrentPage({ commit }, page) {
+      commit(CURRENT_PAGE, page);
     },
   },
 };
