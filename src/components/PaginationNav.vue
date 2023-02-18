@@ -61,7 +61,11 @@ export default {
       let paginationNum = Number(e.target.dataset.page);
       this.changeCurrentPage(paginationNum);
       this.fetchMovies();
-      if (paginationNum <= 4) return;
+      if (paginationNum <= 4) {
+        this.min = 1;
+        this.max = 6;
+        return;
+      }
       this.min = paginationNum - 4;
       console.log(paginationNum - 4);
       console.log(this.max);
@@ -79,4 +83,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped />
+<style lang="scss" src="../scss/pagination.scss" scoped />

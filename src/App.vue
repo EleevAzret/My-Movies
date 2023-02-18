@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="pb-3">
     <PosterBg :url="url" />
     <MoviesList :list="moviesList" @changeBg="onChangePoster" />
     <PaginationNav :pages="allPages" />
