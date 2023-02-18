@@ -29,7 +29,7 @@
           class="page-link"
           href="#"
           aria-label="Next"
-          :data-page="allPages"
+          :data-page="allPages.length"
           @click.prevent="onClickPage"
         >
           <span aria-hidden="true">&raquo;</span>
@@ -46,23 +46,31 @@ export default {
   name: "PaginationNav",
   data: () => ({
     max: 6,
-    min: 0,
+    min: 1,
   }),
   computed: {
     ...mapGetters("movies", ["currentPage", "allPages"]),
     pagePerComp() {
-      if (this.allPages > this.max) {
-        return this.max - this.min;
-      } else {
-        return this.allPages;
-      }
+      console.log(this.allPages.slice(this.min - 1, this.max));
+      return this.allPages.slice(this.min - 1, this.max);
     },
   },
   methods: {
     ...mapActions("movies", ["changeCurrentPage", "fetchMovies"]),
     onClickPage(e) {
-      this.changeCurrentPage(e.target.dataset.page);
+      let paginationNum = Number(e.target.dataset.page);
+      this.changeCurrentPage(paginationNum);
       this.fetchMovies();
+      if (paginationNum <= 4) return;
+      this.min = paginationNum - 4;
+      console.log(paginationNum - 4);
+      console.log(this.max);
+      if (paginationNum >= 44) {
+        this.max = paginationNum;
+        this.min = paginationNum - 5;
+        return;
+      }
+      this.max = this.min + 5;
     },
     isActive(num) {
       return num == this.currentPage ? "active" : "";

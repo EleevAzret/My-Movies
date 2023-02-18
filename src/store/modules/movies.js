@@ -17,7 +17,7 @@ const moviesStore = {
     moviesPerPage: 12,
     currentPage: 1,
     movies: {},
-    pages: 0,
+    pages: [],
   },
   getters: {
     moviesList: ({ movies }) => movies,
@@ -30,11 +30,12 @@ const moviesStore = {
       state.movies = value;
     },
     [PAGES](state, pages) {
-      if (pages > 20) {
-        state.pages = 20;
-      } else {
-        state.pages = pages;
+      if (pages > 50) pages = 50;
+      let pagesArr = [];
+      for (let i = 1; i <= pages; i++) {
+        pagesArr[i - 1] = i;
       }
+      state.pages = pagesArr;
     },
     [CURRENT_PAGE](state, page) {
       state.currentPage = page;
