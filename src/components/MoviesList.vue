@@ -5,7 +5,10 @@
       <div class="row row-cols-auto justify-content-space-between gy-4">
         <template v-if="isExist">
           <div class="col-md" v-for="(movie, key) in list" :key="key">
-            <MovieItem :movie="movie" />
+            <MovieItem
+              :movie="movie"
+              @mouseover="onMouseOver(movie.poster.url)"
+            />
           </div>
         </template>
       </div>
@@ -31,6 +34,11 @@ export default {
   computed: {
     isExist() {
       return Boolean(Object.keys(this.list).length);
+    },
+  },
+  methods: {
+    onMouseOver(url) {
+      this.$emit("changeBg", url);
     },
   },
 };
