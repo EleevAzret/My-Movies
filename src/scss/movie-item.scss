@@ -56,9 +56,14 @@
     }
   }
 
-  &__year {
+  &__year, &__rating {
     color: #fff;
     text-shadow: 0 0 .2rem rgba(#000, 5);
     letter-spacing: .15rem;
   }
+
+  &__r-wrap {
+    display: flex;
+    align-items: center;
+  } 
 }
