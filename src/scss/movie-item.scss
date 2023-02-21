@@ -56,14 +56,18 @@
     }
   }
 
-  &__year, &__rating {
+  &__year, &__rating, &__resource {
     color: #fff;
     text-shadow: 0 0 .2rem rgba(#000, 5);
-    letter-spacing: .15rem;
+    letter-spacing: .075rem;
   }
 
-  &__r-wrap {
+  &__rating, &__star {
+    margin-right: .4rem;
+  }
+
+  &__rating-item {
     display: flex;
     align-items: center;
-  } 
+  }
 }
