@@ -30,7 +30,7 @@ const moviesStore = {
       state.movies = value;
     },
     [PAGES](state, pages) {
-      if (pages > 50) pages = 50;
+      if (pages > 21) pages = 21;
       let pagesArr = [];
       for (let i = 1; i <= pages; i++) {
         pagesArr[i - 1] = i;

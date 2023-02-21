@@ -58,22 +58,25 @@ export default {
   methods: {
     ...mapActions("movies", ["changeCurrentPage", "fetchMovies"]),
     onClickPage(e) {
-      let paginationNum = Number(e.target.dataset.page);
+      let paginationNum = Number(e.currentTarget.dataset.page);
+
       this.changeCurrentPage(paginationNum);
       this.fetchMovies();
+
       if (paginationNum <= 4) {
         this.min = 1;
         this.max = 6;
         return;
       }
+
       this.min = paginationNum - 4;
-      console.log(paginationNum - 4);
-      console.log(this.max);
-      if (paginationNum >= 44) {
+
+      if (paginationNum >= this.allPages.length - this.max) {
         this.max = paginationNum;
         this.min = paginationNum - 5;
         return;
       }
+
       this.max = this.min + 5;
     },
     isActive(num) {
