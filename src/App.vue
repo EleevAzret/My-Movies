@@ -1,37 +1,30 @@
 <template>
-  <div id="app" class="pb-3">
-    <PosterBg :url="url" />
-    <MoviesList :list="moviesList" @changeBg="onChangePoster" />
-    <PaginationNav :pages="allPages" />
-  </div>
+  <nav>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </nav>
+  <router-view />
 </template>
 
-<script>
-import { mapActions, mapGetters } from "vuex";
-import MoviesList from "./components/MoviesList.vue";
-import PosterBg from "./components/PosterBg.vue";
-import PaginationNav from "./components/PaginationNav.vue";
+<style lang="scss">
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
 
-export default {
-  name: "App",
-  components: {
-    MoviesList,
-    PosterBg,
-    PaginationNav,
-  },
-  data: () => ({
-    url: "",
-  }),
-  computed: {
-    ...mapGetters("movies", ["moviesList"]),
-  },
-  methods: {
-    ...mapActions("movies", ["fetchMovies"]),
-    onChangePoster(poster) {
-      this.url = poster;
-    },
-  },
-};
-</script>
+nav {
+  padding: 30px;
 
-<style src="./scss/app.scss" lang="scss" />
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
+}
+</style>
