@@ -30,4 +30,4 @@ export default {
 };
 </script>
 
-<style src="./scss/app.scss" lang="scss" />
+<style lang="scss" src="./scss/app.scss" />

@@ -6,7 +6,7 @@
           class="page-link"
           href="#"
           aria-label="Previous"
-          :data-page="1"
+          data-page="1"
           @click.prevent="onClickPage"
         >
           <span aria-hidden="true">&laquo;</span>
@@ -29,7 +29,7 @@
           class="page-link"
           href="#"
           aria-label="Next"
-          :data-page="allPages.length"
+          :data-page="lastPage"
           @click.prevent="onClickPage"
         >
           <span aria-hidden="true">&raquo;</span>
@@ -53,12 +53,14 @@ export default {
     pagePerComp() {
       return this.allPages.slice(this.min - 1, this.max);
     },
+    lastPage() {
+      return this.allPages.length;
+    },
   },
   methods: {
     ...mapActions("movies", ["changeCurrentPage", "fetchMovies"]),
     onClickPage(e) {
       let paginationNum = Number(e.currentTarget.dataset.page);
-
       this.changeCurrentPage(paginationNum);
       this.fetchMovies();
 
@@ -77,8 +79,8 @@ export default {
       this.min = paginationNum - 4;
 
       if (paginationNum >= this.allPages.length - this.max) {
-        this.max = paginationNum;
-        this.min = paginationNum - 5;
+        this.max = paginationNum + 1;
+        this.min = paginationNum - 4;
         return;
       }
 
