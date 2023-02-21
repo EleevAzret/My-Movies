@@ -1,32 +1,28 @@
 <template>
   <div id="app" class="pb-3">
+    <NavbarMenu />
     <PosterBg :url="url" />
-    <MoviesList :list="moviesList" @changeBg="onChangePoster" />
-    <PaginationNav :pages="allPages" />
+    <router-view @changeBg="onChangePoster" />
+    <PaginationNav />
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import MoviesList from "./components/MoviesList.vue";
+import NavbarMenu from "./components/NavbarMenu.vue";
 import PosterBg from "./components/PosterBg.vue";
 import PaginationNav from "./components/PaginationNav.vue";
 
 export default {
   name: "App",
   components: {
-    MoviesList,
     PosterBg,
     PaginationNav,
+    NavbarMenu,
   },
   data: () => ({
     url: "",
   }),
-  computed: {
-    ...mapGetters("movies", ["moviesList"]),
-  },
   methods: {
-    ...mapActions("movies", ["fetchMovies"]),
     onChangePoster(poster) {
       this.url = poster;
     },

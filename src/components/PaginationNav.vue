@@ -51,7 +51,6 @@ export default {
   computed: {
     ...mapGetters("movies", ["currentPage", "allPages"]),
     pagePerComp() {
-      console.log(this.allPages.slice(this.min - 1, this.max));
       return this.allPages.slice(this.min - 1, this.max);
     },
   },
@@ -63,6 +62,12 @@ export default {
       this.changeCurrentPage(paginationNum);
       this.fetchMovies();
 
+      this.changePage(paginationNum);
+    },
+    isActive(num) {
+      return num == this.currentPage ? "active" : "";
+    },
+    changePage(paginationNum) {
       if (paginationNum <= 4) {
         this.min = 1;
         this.max = 6;
@@ -78,9 +83,6 @@ export default {
       }
 
       this.max = this.min + 5;
-    },
-    isActive(num) {
-      return num == this.currentPage ? "active" : "";
     },
   },
 };
