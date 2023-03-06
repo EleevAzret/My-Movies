@@ -1,39 +1,38 @@
 <template>
-  <div class="top-movies">
-    <h4 class="top-movies__title">{{ title }}</h4>
+  <div class="searching-movies">
     <MoviesList :list="moviesList" @changeBg="onChangePoster" />
     <PaginationNav @changePage="onChangePage" />
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import MoviesList from "./MoviesList.vue";
 import PaginationNav from "./PaginationNav.vue";
 
+
 export default {
-  name: "TopMovies",
+  name: "SearchingMovies",
   components: {
     MoviesList,
     PaginationNav,
   },
-  data: () => ({
-    title: "Top Movies",
-  }),
   computed: {
     ...mapGetters("movies", ["moviesList"]),
   },
   methods: {
-    ...mapActions("movies", ["fetchMovies", "changeCurrentPage"]),
+    ...mapActions("movies", ["searchMovies", "changeCurrentPage"]),
     onChangePoster(url) {
       this.$emit("changeBg", url);
     },
     onChangePage(page) {
       this.changeCurrentPage(page);
-      this.fetchMovies();
+      this.searchMovies();
     },
   },
 };
 </script>
 
-<style lang="scss" src="../scss/top-movies.scss" scoped />
+<style>
+
+</style>

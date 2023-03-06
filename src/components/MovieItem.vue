@@ -86,6 +86,7 @@ export default {
   },
   computed: {
     posterBg() {
+      if (!this.movie.poster.url) return "";
       return this.movie.poster.url;
     },
     kpRating() {

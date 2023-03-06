@@ -1,13 +1,5 @@
 .list {
   margin-bottom: 3rem;
-  
-  &__title {
-    color: #fff;
-
-    @media (max-width: 575.98px) {
-      padding-left: .7rem;
-    }
-  }
 
   .row {
     @media (max-width: 575.98px) {

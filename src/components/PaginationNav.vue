@@ -64,7 +64,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions("movies", ["changeCurrentPage", "fetchMovies"]),
     onChangeQuery({ pageNum = 1 }) {
       this.changePage(Number(pageNum));
     },
@@ -76,10 +75,8 @@ export default {
       return num == this.currentPage ? "active" : "";
     },
     changePage(pageNum) {
-      this.changeCurrentPage(pageNum);
-      this.fetchMovies();
       this.$router.push({ query: { pageNum } });
-
+      this.$emit("changePage", pageNum);
       this.changePagination(pageNum);
     },
     changePagination(paginationNum) {

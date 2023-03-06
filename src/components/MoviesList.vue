@@ -1,17 +1,14 @@
 <template>
   <div class="list">
-    <div class="container">
-      <h2 class="list__title mb-4">{{ title }}</h2>
-      <div class="row row-cols-auto justify-content-space-between gy-4">
-        <template v-if="isExist">
-          <div class="col-md" v-for="(movie, key) in list" :key="key">
-            <MovieItem
-              :movie="movie"
-              @mouseover="onMouseOver(movie.poster.url)"
-            />
-          </div>
-        </template>
-      </div>
+    <div class="row row-cols-auto justify-content-space-between gy-4">
+      <template v-if="isExist">
+        <div class="col-md" v-for="(movie, key) in list" :key="key">
+          <MovieItem
+            :movie="movie"
+            @mouseover="onMouseOver(movie.poster.url)"
+          />
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -28,10 +25,6 @@ export default {
     list: {
       type: Object,
       default: () => ({}),
-    },
-    title: {
-      type: String,
-      default: "",
     },
   },
   computed: {
