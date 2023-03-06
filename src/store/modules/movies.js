@@ -48,8 +48,9 @@ const moviesStore = {
       },
       root: true,
     },
-    async fetchMovies({ getters, commit }) {
+    async fetchMovies({ getters, commit, dispatch }) {
       try {
+        dispatch('toggleLoader', true, { root: true });
         const { moviesPerPage, currentPage } = getters;
         const response = await axios.get(
           `${topFilms}&limit=${moviesPerPage}&page=${currentPage}`
@@ -59,7 +60,9 @@ const moviesStore = {
         commit(PAGES, response.pages);
       } catch (err) {
         console.log(err);
-      }
+      } finally {
+        dispatch('toggleLoader', false, { root: true });
+      };
     },
     changeCurrentPage({ commit }, page) {
       commit(CURRENT_PAGE, page);

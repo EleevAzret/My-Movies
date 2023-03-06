@@ -7,7 +7,7 @@
           href="#"
           aria-label="Previous"
           data-page="1"
-          @click.prevent="onClickPage"
+          @click.prevent="onChangePage"
         >
           <span aria-hidden="true">&laquo;</span>
         </a>
@@ -18,7 +18,7 @@
             class="page-link"
             :class="isActive(i)"
             href="#"
-            @click.prevent="onClickPage"
+            @click.prevent="onChangePage"
             :data-page="i"
             >{{ i }}</a
           >
@@ -30,7 +30,7 @@
           href="#"
           aria-label="Next"
           :data-page="lastPage"
-          @click.prevent="onClickPage"
+          @click.prevent="onChangePage"
         >
           <span aria-hidden="true">&raquo;</span>
         </a>
@@ -57,19 +57,32 @@ export default {
       return this.allPages.length;
     },
   },
+  watch: {
+    "$route.query": {
+      handler: "onChangeQuery",
+      immediate: true,
+    },
+  },
   methods: {
     ...mapActions("movies", ["changeCurrentPage", "fetchMovies"]),
-    onClickPage(e) {
+    onChangeQuery({ pageNum = 1 }) {
+      this.changePage(Number(pageNum));
+    },
+    onChangePage(e) {
       let paginationNum = Number(e.currentTarget.dataset.page);
-      this.changeCurrentPage(paginationNum);
-      this.fetchMovies();
-
       this.changePage(paginationNum);
     },
     isActive(num) {
       return num == this.currentPage ? "active" : "";
     },
-    changePage(paginationNum) {
+    changePage(pageNum) {
+      this.changeCurrentPage(pageNum);
+      this.fetchMovies();
+      this.$router.push({ query: { pageNum } });
+
+      this.changePagination(pageNum);
+    },
+    changePagination(paginationNum) {
       if (paginationNum <= 4) {
         this.min = 1;
         this.max = 6;

@@ -1,23 +1,20 @@
 <template>
   <div id="app" class="pb-3">
-    <NavbarMenu />
+    <VLoader />
     <PosterBg :url="url" />
     <router-view @changeBg="onChangePoster" />
-    <PaginationNav />
   </div>
 </template>
 
 <script>
-import NavbarMenu from "./components/NavbarMenu.vue";
 import PosterBg from "./components/PosterBg.vue";
-import PaginationNav from "./components/PaginationNav.vue";
+import VLoader from "./components/VLoader.vue";
 
 export default {
   name: "App",
   components: {
     PosterBg,
-    PaginationNav,
-    NavbarMenu,
+    VLoader,
   },
   data: () => ({
     url: "",
